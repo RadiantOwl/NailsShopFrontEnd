@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CareNail | Запись</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="nails, site, website" />
+    <meta name="description" content="Лучшие ноготочки в мире" />
+    <link href="css/record.css" rel="stylesheet" type="text/css" />
+    <link href="image/icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script>
+        function sendJSON() {
+          // с помощью jQuery обращаемся к элементам на странице по их именам
+          let first_name = document.querySelector('#first_name');
+          let second_name = document.querySelector('#second_name');
+          let email = document.querySelector('#email');
+          let phone_num = document.querySelector('#phone_num');
+          let date = document.querySelector('#date');
+
+
+          //let date = document.querySelector('#date');
+          // а вот сюда мы поместим ответ от сервера
+          let result = document.querySelector('.result');
+          // создаём новый экземпляр запроса XHR
+          let xhr = new XMLHttpRequest();
+          // адрес, куда мы отправим нашу JSON-строку
+          let url = "https://localhost:44374/api/customers";
+          // открываем соединение
+          xhr.open("POST", url, true);
+          // устанавливаем заголовок — выбираем тип контента, который отправится на сервер, в нашем случае мы явно пишем, что это JSON
+          xhr.setRequestHeader("Content-Type", "application/json");
+          // когда придёт ответ на наше обращение к серверу, мы его обработаем здесь
+          xhr.onreadystatechange = function () {
+            // если запрос принят и сервер ответил, что всё в порядке
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              // выводим то, что ответил нам сервер — так мы убедимся, что данные он получил правильно
+              result.innerHTML = this.responseText;
+            }
+          };
+          // преобразуем наши данные JSON в строку
+          var data = JSON.stringify
+          ({ "first_name": first_name.value, "second_name": second_name.value, "email": email.value, "phone_num": phone_num.value, "date": date.value});
+          // когда всё готово, отправляем JSON на сервер
+          xhr.send(data);
+          alert("Вы успешно отправили заявку.")
+        }
+      </script>
+</head>
+
+<body>
+    <div id="page-wrap">
+        <header>
+            <!-- ШАПКА САЙТА -->
+            <div id="HeadMenu1">
+                <div>
+                    <a href="price.html">Услуги и цены</a>
+                </div>
+                <div>
+                    <a href="galery.html">Портфолио</a>
+                </div>
+                <div>
+                    <a href="stocks.html">Акции</a>
+                </div>
+                <div>
+                    <a href="about.html">О нас</a>
+                </div>
+            </div>
+            <div id="LogoMenu">
+                <div>
+                    <a href="index.html">CareNail</a>
+                </div>
+            </div>
+            <div id="HeadMenu2">
+                <div id="empty"></div>
+                <a class="user" href="registration.html"> Записаться на прием</a>
+            </div>
+        </header>
+        <!-- НАПОЛНЕНИЕ -->
+        <div id="mainForm">
+            <p><b>Имя:</b><br>
+                <input type="text" id="first_name" size="40" placeholder="Имя">
+            </p>
+            <p><b>Фамилия:</b><br>
+                <input type="text" id="second_name" size="40" placeholder="Фамилия">
+            </p>
+            <p><b>Email:</b><br>
+                <input type="text" id="email" size="40" placeholder="E-mail адрес">
+            </p>
+            <p><b>Телефон:</b><br>
+                <input type="text" id="phone_num" size="40" placeholder="Номер телефона">
+            </p>
+            <p><b>Дата:</b><br>
+                <input type="date" id="date" size="40" placeholder="Дата записи">
+            </p>
+             <button onclick="sendJSON()">Записаться</button>
+        </div>
+       
+    </div>
+    <footer>
+        <div id="FootLogo">
+            <div>
+                <a href="index.html">CareNail</a>
+            </div>
+        </div>
+        <div id="FootContent">
+            <div>
+                <a href="price.html">Услуги и цены</a>
+            </div>
+            <div>
+                <a href="galery.html">Портфолио</a>
+            </div>
+            <div>
+                <a href="stocks.html">Акции</a>
+            </div>
+            <div>
+                <a href="about.html">О нас</a>
+            </div>
+        </div>
+        <div id="FootSites">
+            <div>
+                <a href="#"><img src="image/VK.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/tele.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/inst.png"></a>
+            </div>
+        </div>
+        </div>
+    </footer>
+</body>
+</html>

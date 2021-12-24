@@ -1,0 +1,281 @@
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+/* div {
+  outline: 1px solid black;
+} */
+
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #ffdce6;
+  font-family: Century Gothic Regular;
+  line-height: 135%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+/* =============ВЫДЕЛЕНИЕ============= */
+::selection {
+  background: rgb(214, 207, 207);
+  color: #333;
+}
+/* =============ШАПОЧКА============= */
+header {
+  width: 98%;
+  padding: 1%;
+  min-width: 150px;
+  font-family: Century Gothic Regular;
+  background: #a03956;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Шапка блоки */
+header #HeadMenu1 {
+  width: 36.5%;
+  display: flex;
+  justify-content: space-between;
+}
+header #HeadMenu2 {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  width: 36.5%;
+}
+#empty {
+  width: 24%;
+}
+/* Лого блок */
+header #LogoMen {
+  width: 27%;
+}
+/* Ссылки шапки */
+#HeadMenu1 a,
+#HeadMenu2 a {
+  font-size: 160%;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#LogoMenu a {
+  font-size: 350%;
+  vertical-align: middle;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#HeadMenu1 a:hover,
+#HeadMenu2 a:hover {
+  color: #ffdce6;
+  text-shadow: rgb(83, 83, 83) 0 0 3px;
+  text-decoration: none;
+  transition: all.4s ease;
+}
+/* Ссылки шапки фото для профиля */
+.user:before {
+  float: left;
+  content: "";
+  margin-right: 5px;
+  background-image: url(user.png);
+  height: 25px;
+  width: 25px;
+}
+.user {
+  line-height: 25px;
+}
+.user:hover:before {
+  transition: all.4s ease;
+  background-image: url(user1.png);
+}
+/* =============ПОДВАЛЬЧИК============= */
+footer {
+  width: 98%;
+  padding: 1%;
+  margin-top: 10px;
+  min-width: 100px;
+  font-family: Century Gothic Regular;
+  background: #a03956;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  height: 25px;
+}
+
+#page-wrap {
+  flex-grow: 1;
+}
+/* блоки подвала Лого */
+footer #FootLogo {
+  text-align: center;
+  font-weight: bold;
+  width: 15%;
+}
+#FootLogo a {
+  font-size: 2em;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+/* блоки подвала Контент */
+footer #FootContent {
+  width: 55%;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+#FootContent a {
+  font-size: 1.5em;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#FootContent a:hover {
+  color: #e6d9d9;
+  text-shadow: rgb(83, 83, 83) 0 0 3px;
+  text-decoration: none;
+  transition: all.4s ease;
+}
+/* блоки подвала Сети */
+footer #FootSites {
+  text-align: center;
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+#FootSites img {
+  width: 30%;
+}
+
+/* =============НАПОЛНЕНИЕ============= */
+
+/*#login {
+  width: 1000px;
+  height: 470px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #a03956;
+  text-align: center;
+}
+#login div {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}*/
+#mainForm {
+  margin-top: 50px;
+  text-align: center;
+}
+div#title {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #fff5f8;
+  margin-top: 65px;
+  margin-bottom: 50px;
+}
+/*div#form1 {
+  margin-bottom: 30px;
+  color: #fff5f8;
+}
+div#form2 {
+  margin-bottom: 15px;
+  color: #fff5f8;
+}*/
+div#or,
+#register {
+  color: #fff5f8;
+}
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}    
+input::placeholder {
+  color: #ffd3e0d5;
+  font-weight: inherit;
+  font-size: 90%;
+  font-family: sans-serif;
+}
+    
+p b{
+  font-size: 1.3em;
+  margin-bottom: 5%;
+}
+
+input {
+  margin-bottom: 10px;
+  width: 400px;
+  height: 30px;
+  color: #a03956;
+  font-size: 1.5em;
+  background-color: #a03956;
+  color: #fff5f8;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: #fff5f8;
+  padding: 3px;
+  border-radius: 7px;
+  margin-top: 0.3%;
+}
+
+div#forgotPassword,
+div#forgotPassword a { 
+  padding-top: 3%;
+  text-align: center  ;
+  color: #fff5f8;
+  font-size: 1em;
+}
+button {
+  font-size: 1.4em;
+  color: #fff5f8;
+  width: 12em;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgb(209, 91, 136);
+  border: none;
+  margin-top: 1em;
+}
+
+button:hover {
+  color: #fff5f8;;
+  transition: all.4s ease;
+  text-shadow: rgba(126, 88, 88, 0.24) 0 0 10px;
+  box-shadow: 0 0 20px 0 rgba(126, 88, 88, 0.24), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+}
+button:active {
+  background-color: rgb(250, 165, 197);
+}
+
+#register a {
+  line-height: 200%;
+  font-size: 1.9em;
+  color: #fff5f8;
+  text-decoration: underline;
+}
+div#register h1 {
+  margin-top: 5%;
+  font-size: 1.5em;
+  font-weight: lighter;
+  }
+
+div#enter1{
+  vertical-align: center;
+  margin-top: 3%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+

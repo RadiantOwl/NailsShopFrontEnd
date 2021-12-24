@@ -1,0 +1,196 @@
+
+  
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <title>CareNail | Приёмы</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="nails, site, website" />
+        <meta name="description" content="Лучшие ноготочки в мире" />
+        <link href="css/admin.css" rel="stylesheet" type="text/css" />
+        <link href="image/icon.ico" rel="shortcut icon" type="image/x-icon" />
+  </head>
+
+  <body>
+
+    <div id="page-wrap">
+      <header>
+          <!-- ШАПКА САЙТА -->
+          <div id="HeadMenu1">
+              <div>
+                  <a href="price.html">Услуги и цены</a>
+              </div>
+              <div>
+                  <a href="galery.html">Портфолио</a>
+              </div>
+              <div>
+                  <a href="stocks.html">Акции</a>
+              </div>
+              <div>
+                  <a href="about.html">О нас</a>
+              </div>
+          </div>
+          <div id="LogoMenu">
+              <div>
+                  <a href="index.html">CareNail</a>
+              </div>
+          </div>
+          <div id="HeadMenu2">
+              <div id="empty"></div>
+              <a class="user" href="registration.html"> Записаться на прием</a>
+          </div>
+      </header>
+      <div id="myData">
+
+        <div class="future">
+            <h3>Будущие приёмы</h3>
+            <div id='future'>
+  
+          </div>
+  
+          </div>
+
+        <div class="today">
+          <h3>Приёмы на сегодня</h3>
+          <div id='today'>
+
+        </div>
+        </div>
+        <div class="tomorrow">
+          <h3>Приёмы на завтра</h3>
+          <div id='tomorrow'>
+
+        </div>
+        </div>
+
+        <div class="past">
+            <h3>Прошедшие приёмы</h3>
+            <div id='past'>
+  
+            </div>
+          </div>
+  </div>
+    </div>
+
+      <section>
+
+      </section>
+
+      <script>
+
+            var xhr = new XMLHttpRequest();
+
+            // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+            xhr.open('GET', 'https://localhost:44374/api/customers', false);
+
+            // 3. Отсылаем запрос
+            xhr.send();
+
+            // 4. Если код ответа сервера не 200, то это ошибка
+            if (xhr.status != 200) {
+                // обработать ошибку
+                alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+            } 
+            else {
+                // вывести результат
+                var data = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+            }
+
+            let today = new Date();
+
+            function compare(d) {
+            var res = null;
+            var b = new Date(d);
+            var tmrw = new Date(today);
+            tmrw.setDate(today.getDate() + 1);
+            if (today > b && today.getDate() > b.getDate()) { //если число более раннее чем сегодня
+                res = -1;
+            }
+            else if (b - today < 86400000 && today.getDate() == b.getDate()) { //если число сегодняшнее
+                res = 0;
+            }
+            else if (b - tmrw < 86400000) { //если инкремент сегодняшнего числа равно завтрашнему
+                res = 1;
+            }
+            else if (today < b) 
+            { // если сегодняшнее число более раннее чем сравниваемое
+                res = 2;
+            }
+            return res;
+            }
+        
+            var mainContainer = document.getElementById("myData");
+
+            var mainContainer1 = document.getElementById("past");
+            var mainContainer2 = document.getElementById("today");
+            var mainContainer3 = document.getElementById("tomorrow");
+            var mainContainer4 = document.getElementById("future");
+
+
+            for (var i = 0; i < data.length; i++) {
+                console.log(compare(data[i].date))
+                if(compare(data[i].date)==0) {
+                    var tday = document.createElement("div");
+                    tday.innerHTML = "<p>"+data[i].first_name+" "+
+                        data[i].second_name+"</p><p>"+
+                            data[i].email+"</p><p>"+
+                                data[i].phone_num+"</p><br>";
+                    mainContainer2.appendChild(tday);
+                }
+
+                if(compare(data[i].date)==-1) {
+                    var past = document.createElement("div");
+                    past.innerHTML = "<p>"+data[i].first_name+" "+data[i].second_name+"</p><p>"+data[i].email+"</p><p>"+data[i].phone_num+"</p><br>";
+                    mainContainer1.appendChild(past);
+                }
+
+                if(compare(data[i].date)==1) {
+                    var tomorrow = document.createElement("div");
+                    tomorrow.innerHTML = "<p>"+data[i].first_name+" "+data[i].second_name+"</p><p>"+data[i].email+"</p><p>"+data[i].phone_num+"</p><br>";
+                    mainContainer3.appendChild(tomorrow);
+                }
+
+                if(compare(data[i].date)==2) {
+                    var future = document.createElement("div");
+                    future.innerHTML = "<p>"+data[i].first_name+" "+data[i].second_name+"</p><p>"+data[i].email+"</p><p>"+data[i].phone_num+"</p><br>";
+                    mainContainer4.appendChild(future);
+                }
+        }
+            
+    </script>
+      <footer>
+        <div id="FootLogo">
+            <div>
+                <a href="index.html">CareNail</a>
+            </div>
+        </div>
+        <div id="FootContent">
+            <div>
+                <a href="price.html">Услуги и цены</a>
+            </div>
+            <div>
+                <a href="galery.html">Портфолио</a>
+            </div>
+            <div>
+                <a href="stocks.html">Акции</a>
+            </div>
+            <div>
+                <a href="about.html">О нас</a>
+            </div>
+        </div>
+        <div id="FootSites">
+            <div>
+                <a href="#"><img src="image/VK.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/tele.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/inst.png"></a>
+            </div>
+        </div>
+        </div>
+    </footer>
+  </body>
+</html>

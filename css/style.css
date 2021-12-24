@@ -1,0 +1,256 @@
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+/* div {
+  outline: 1px solid black;
+} */
+
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #ffdce6;
+  font-family: Century Gothic Regular;
+  line-height: 135%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =============ВЫДЕЛЕНИЕ============= */
+::selection {
+  background: rgb(214, 207, 207);
+  color: #333;
+}
+/* =============ШАПОЧКА============= */
+header {
+  width: 98%;
+  padding: 1%;
+  min-width: 150px;
+  font-family: Century Gothic Regular;
+  background: #a03956;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Шапка блоки */
+header #HeadMenu1 {
+  width: 36.5%;
+  display: flex;
+  justify-content: space-between;
+}
+header #HeadMenu2 {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  width: 36.5%;
+}
+#empty {
+  width: 24%;
+}
+/* Лого блок */
+header #LogoMen {
+  width: 27%;
+}
+/* Ссылки шапки */
+#HeadMenu1 a,
+#HeadMenu2 a {
+  font-size: 160%;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#LogoMenu a {
+  font-size: 350%;
+  vertical-align: middle;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#HeadMenu1 a:hover,
+#HeadMenu2 a:hover {
+  color: #ffdce6;
+  text-shadow: rgb(83, 83, 83) 0 0 3px;
+  text-decoration: none;
+  transition: all.4s ease;
+}
+/* Ссылки шапки фото для профиля */
+.user:before {
+  float: left;
+  content: "";
+  margin-right: 5px;
+  background-image: url(user.png);
+  height: 25px;
+  width: 25px;
+}
+.user {
+  line-height: 25px;
+}
+.user:hover:before {
+  transition: all.4s ease;
+  background-image: url(user1.png);
+}
+/* =============ПОДВАЛЬЧИК============= */
+footer {
+  width: 98%;
+  padding: 1%;
+  margin-top: 10px;
+  min-width: 100px;
+  font-family: Century Gothic Regular;
+  background: #a03956;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  height: 25px;
+}
+
+#page-wrap {
+  flex-grow: 1;
+}
+/* блоки подвала Лого */
+footer #FootLogo {
+  text-align: center;
+  font-weight: bold;
+  width: 15%;
+}
+#FootLogo a {
+  font-size: 2em;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+/* блоки подвала Контент */
+footer #FootContent {
+  width: 55%;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+#FootContent a {
+  font-size: 1.5em;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+#FootContent a:hover {
+  color: #e6d9d9;
+  text-shadow: rgb(83, 83, 83) 0 0 3px;
+  text-decoration: none;
+  transition: all.4s ease;
+}
+/* блоки подвала Сети */
+footer #FootSites {
+  text-align: center;
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+#FootSites img {
+  width: 30%;
+}
+
+/* =============НАПОЛНЕНИЕ============= */
+
+/* ЕДИНЫЙ ФОРМАТ ТЕКСТА НА СТРАНИЦЕ */
+.Form {
+  color: black;
+  max-width: 600px;
+  font-size: 120%;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Блок 1 баннер*/
+#block1 {
+  width: 100%;
+}
+/* Блок 2 акции*/
+#Text2,
+#Text2 a {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100%;
+  font-size: 110%;
+  width: 98%;
+  padding: 1%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#block2 {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+#block2 img {
+  width: 95%;
+  border: 2px solid #a03956;
+}
+#block2 h2 {
+  margin-top: 10px;
+  color: black;
+}
+#block2 p {
+  text-align: justify;
+  margin-top: 3px;
+  margin-left: 50px;
+  margin-right: 50px;
+  color: rgb(0, 0, 0);
+}
+
+/* Блок 3 работы */
+#block3 {
+  text-align: center;
+}
+.FotoLine {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.FotoLine img {
+  width: 350px;
+  box-shadow: 0 0 5px rgb(68, 65, 65);
+  margin: 20px;
+}
+
+/* Блок 4 услуги */
+#block4 {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+#block4 img {
+  margin-bottom: 1%;
+  width: 98%;
+  border: 2px solid #a03956;
+}
+#block4 h2 {
+  font-size: 200%;
+  margin-top: 1%;
+  color: black;
+  margin-bottom: 7%;
+}
+
+/* Блок 5 О нас */
+/* #block5 {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+#ListAbout {
+  text-align: left;
+  color: rgb(0, 0, 0);
+  line-height: 100%;
+  font-size: 110%;
+  width: 98%;
+  padding: 1%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+} */

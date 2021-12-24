@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CareNail | Услуги и цены</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="nails, site, website" />
+    <meta name="description" content="Лучшие ноготочки в мире" />
+    <link href="css/price.css" rel="stylesheet" type="text/css" />
+    <link href="image/icon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+
+<body>
+    <div id="page-wrap">
+        <header>
+            <!-- ШАПКА САЙТА -->
+            <div id="HeadMenu1">
+                <div>
+                    <a href="price.html">Услуги и цены</a>
+                </div>
+                <div>
+                    <a href="galery.html">Портфолио</a>
+                </div>
+                <div>
+                    <a href="stocks.html">Акции</a>
+                </div>
+                <div>
+                    <a href="about.html">О нас</a>
+                </div>
+            </div>
+            <div id="LogoMenu">
+                <div>
+                    <a href="index.html">CareNail</a>
+                </div>
+            </div>
+            <div id="HeadMenu2">
+                <div id="empty"></div>
+                <a class="user" href="registration.html"> Записаться на прием</a>
+            </div>
+        </header>
+        <!-- НАПОЛНЕНИЕ -->
+        <!-- Блок 4 -->
+        <div id="Text2">
+            <h1>Услуги и цены</h1>
+        </div>
+        <div id=content>
+
+        </div>
+
+        <div id="block4">
+                <div>
+                <img src="image/service1.png">
+                    <h2>Маникюр и педикюр</h2>
+                    <div class="Form" > 
+                    
+                    <div class="list1" id="list1">
+
+                    </div>
+                    <div class="list2" id="list2">
+
+                    </div>
+                </div>
+                    </div>
+
+
+                    <div>
+                        <img src="image/service2.png">
+                        <div>
+                            <h2>Покрытие, снятие, укрепление</h2>
+                            <div class="Form">
+                                <div class="list1" id="list3">
+
+                                </div>
+                                <div class="list2" id="list4">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <img src="image/service3.png">
+                        <div>
+                            <h2>Дизайн</h2>
+                            <div class="Form">
+                                <div class="list1" id="list5">
+
+                                </div>
+                                <div class="list2" id="list6">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    <script>
+
+            var xhr = new XMLHttpRequest();
+
+            // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+            xhr.open('GET', 'https://localhost:44374/api/procedures', false);
+
+            // 3. Отсылаем запрос
+            xhr.send();
+
+            // 4. Если код ответа сервера не 200, то это ошибка
+            if (xhr.status != 200) {
+                // обработать ошибку
+                alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+            } else {
+                // вывести результат
+                var data = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+            }
+
+            
+            var mainContainer1 = document.getElementById("list1");
+            var mainContainer2 = document.getElementById("list2");
+
+            var mainContainer3 = document.getElementById("list3");
+            var mainContainer4 = document.getElementById("list4");
+
+            var mainContainer5 = document.getElementById("list5");
+            var mainContainer6 = document.getElementById("list6");
+
+            for (var i = 0; i < data.length; i++) {
+
+                if(data[i].procedure_type=="Маникюр и педикюр") {
+                    var divProcedures1 = document.createElement("div");
+                    divProcedures1.innerHTML = "<p>"+data[i].procedure_name+"</p><br>";
+                    mainContainer1.appendChild(divProcedures1);
+                    var divPrices1 = document.createElement("div");
+                    divPrices1.innerHTML = "<p>"+data[i].procedure_price+" &#8381</p><br>";
+                    mainContainer2.appendChild(divPrices1);
+                }
+                if(data[i].procedure_type=="Покрытие, снятие, укрепление")
+                {
+                    var divProcedures2 = document.createElement("div");
+                    divProcedures2.innerHTML = "<p>"+data[i].procedure_name+"</p><br>";
+                    mainContainer3.appendChild(divProcedures2);
+                    var divPrices2 = document.createElement("div");
+                    divPrices2.innerHTML = "<p>"+data[i].procedure_price+" &#8381</p><br>";
+                    mainContainer4.appendChild(divPrices2);
+                }
+                else if(data[i].procedure_type=="Дизайн")
+                {
+                    var divProcedures3 = document.createElement("div");
+                    divProcedures3.innerHTML = "<p>"+data[i].procedure_name+"</p><br>";
+                    mainContainer5.appendChild(divProcedures3);
+                    var divPrices3 = document.createElement("div");
+                    divPrices3.innerHTML = "<p>"+data[i].procedure_price+" &#8381</p><br>";
+                    mainContainer6.appendChild(divPrices3);
+                }
+                //else {break;}
+                
+            }
+
+        
+    </script>
+    <footer>
+        <div id="FootLogo">
+            <div>
+                <a href="index.html">CareNail</a>
+            </div>
+        </div>
+        <div id="FootContent">
+            <div>
+                <a href="price.html">Услуги и цены</a>
+            </div>
+            <div>
+                <a href="galery.html">Портфолио</a>
+            </div>
+            <div>
+                <a href="stocks.html">Акции</a>
+            </div>
+            <div>
+                <a href="about.html">О нас</a>
+            </div>
+        </div>
+        <div id="FootSites">
+            <div>
+                <a href="#"><img src="image/VK.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/tele.png"></a>
+            </div>
+            <div>
+                <a href="#"><img src="image/inst.png"></a>
+            </div>
+        </div>
+        </div>
+    </footer>
+    
+</body>
+
+</html>
