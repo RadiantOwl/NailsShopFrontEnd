@@ -279,3 +279,16 @@ div#enter1{
   justify-content: center;
 }
 
+select {
+  margin: 1em;
+  margin-top: 2em;
+  width:22%;
+
+}
+option {
+  padding: 1.5%;
+  padding-left: 1em;
+  background-color: #f0c3d0;
+  border: 1px solid rgb(201, 88, 131);
+  border-radius: 5px;
+}

@@ -9,6 +9,25 @@
     <link href="css/record.css" rel="stylesheet" type="text/css" />
     <link href="image/icon.ico" rel="shortcut icon" type="image/x-icon" />
     <script>
+
+      var xhr = new XMLHttpRequest();
+
+      // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+      xhr.open('GET', 'https://localhost:44374/api/procedures', false);
+
+      // 3. Отсылаем запрос
+      xhr.send();
+
+      // 4. Если код ответа сервера не 200, то это ошибка
+      if (xhr.status != 200) {
+          // обработать ошибку
+          alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+      } else {
+          // вывести результат
+          var data = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+      }
+
+
         function sendJSON() {
           // с помощью jQuery обращаемся к элементам на странице по их именам
           let first_name = document.querySelector('#first_name');
@@ -16,34 +35,69 @@
           let email = document.querySelector('#email');
           let phone_num = document.querySelector('#phone_num');
           let date = document.querySelector('#date');
+ 
+            let result = document.querySelector('.result');
 
 
-          //let date = document.querySelector('#date');
-          // а вот сюда мы поместим ответ от сервера
-          let result = document.querySelector('.result');
-          // создаём новый экземпляр запроса XHR
+
+          
           let xhr = new XMLHttpRequest();
-          // адрес, куда мы отправим нашу JSON-строку
           let url = "https://localhost:44374/api/customers";
-          // открываем соединение
           xhr.open("POST", url, true);
-          // устанавливаем заголовок — выбираем тип контента, который отправится на сервер, в нашем случае мы явно пишем, что это JSON
           xhr.setRequestHeader("Content-Type", "application/json");
-          // когда придёт ответ на наше обращение к серверу, мы его обработаем здесь
           xhr.onreadystatechange = function () {
-            // если запрос принят и сервер ответил, что всё в порядке
             if (xhr.readyState === 4 && xhr.status === 200) {
-              // выводим то, что ответил нам сервер — так мы убедимся, что данные он получил правильно
               result.innerHTML = this.responseText;
             }
           };
-          // преобразуем наши данные JSON в строку
+          
           var data = JSON.stringify
           ({ "first_name": first_name.value, "second_name": second_name.value, "email": email.value, "phone_num": phone_num.value, "date": date.value});
-          // когда всё готово, отправляем JSON на сервер
           xhr.send(data);
-          alert("Вы успешно отправили заявку.")
+          console.log(data);
+          //после отправки данных клиента вызываем функцию
+          //эта функция найдёт последнего отправленного клиента и отправит его айди в таблицу с процедурами
+
+         // sendProcedures();
+          
         }
+
+        function sendProcedures()
+        {
+            let id_procedure = document.querySelector("#id_procedure");
+            let xhr1 = new XMLHttpRequest();
+          let url1 = "https://localhost:44374/api/appointments"; //вызываем нашу таблицу с процедурами и клиентами, куда мы будем записывать их айдшники
+          xhr1.open("POST", url1, true);
+          xhr1.setRequestHeader("Content-Type", "application/json");
+          xhr1.onreadystatechange = function () {
+            if (xhr1.readyState === 4 && xhr1.status === 200) {
+              result.innerHTML = this.responseText;
+            }
+          };
+
+           // var xhr2 = new XMLHttpRequest(); 
+            xhr2.open('GET', 'https://localhost:44374/api/customers', false); //загружаем данные из таблицы с клиентами
+            xhr2.send();
+            if (xhr2.status != 200) {
+                alert(xhr2.status + ': ' + xhr2.statusText);
+            } 
+            else {
+                var data2 = JSON.parse(xhr2.responseText);
+            }
+            var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отправили
+          var data1 = JSON.stringify
+          ({"id_customer":id_customer.value, "id_procedure":id_procedure.value});
+          xhr1.send(data1);
+            alert("Вы успешно отправили заявку.")
+        }
+      //  function loadList() {
+
+
+
+            
+            
+
+
       </script>
 </head>
 
@@ -76,7 +130,7 @@
             </div>
         </header>
         <!-- НАПОЛНЕНИЕ -->
-        <div id="mainForm">
+        <div id="mainForm" style="display: hidden;">
             <p><b>Имя:</b><br>
                 <input type="text" id="first_name" size="40" placeholder="Имя">
             </p>
@@ -92,10 +146,30 @@
             <p><b>Дата:</b><br>
                 <input type="date" id="date" size="40" placeholder="Дата записи">
             </p>
-             <button onclick="sendJSON()">Записаться</button>
-        </div>
-        <div id="secondForm">
             
+             <button onclick="sendJSON()">Записаться</button><br>
+             <select name = "id_procedure" id="id_procedure"  size="7">
+
+
+             </div>
+        </div>
+       <div>
+         <script>
+
+
+        var mainContainer1 = document.getElementById("id_procedure");
+        for (var i = 0; i < data.length; i++) {
+          var anchor = document.createElement("option");
+          anchor.innerText = data[i].procedure_name + " — " + data[i].procedure_price + "₽";
+          mainContainer1.appendChild(anchor);
+        }
+        
+        
+
+
+  </script>
+
+       </div>
     </div>
     <footer>
         <div id="FootLogo">
