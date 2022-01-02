@@ -58,7 +58,7 @@
           //после отправки данных клиента вызываем функцию
           //эта функция найдёт последнего отправленного клиента и отправит его айди в таблицу с процедурами
 
-         // sendProcedures();
+          sendProcedures();
           
         }
 
@@ -75,7 +75,7 @@
             }
           };
 
-           // var xhr2 = new XMLHttpRequest(); 
+            var xhr2 = new XMLHttpRequest(); 
             xhr2.open('GET', 'https://localhost:44374/api/customers', false); //загружаем данные из таблицы с клиентами
             xhr2.send();
             if (xhr2.status != 200) {
