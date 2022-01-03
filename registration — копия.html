@@ -51,10 +51,10 @@
             }
           };
           
-          var data = JSON.stringify
+          var data0 = JSON.stringify
           ({ "first_name": first_name.value, "second_name": second_name.value, "email": email.value, "phone_num": phone_num.value, "date": date.value});
-          xhr.send(data);
-          console.log(data);
+          xhr.send(data0);
+          console.log(data0);
           //после отправки данных клиента вызываем функцию
           //эта функция найдёт последнего отправленного клиента и отправит его айди в таблицу с процедурами
 
@@ -62,8 +62,27 @@
           
         }
 
+
         function sendProcedures()
         {
+            // var xhrx = new XMLHttpRequest();
+
+            // // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+            // xhrx.open('GET', 'https://localhost:44374/api/procedures', false);
+
+            // // 3. Отсылаем запрос
+            // xhrx.send();
+
+            // // 4. Если код ответа сервера не 200, то это ошибка
+            // if (xhrx.status != 200) {
+            //     // обработать ошибку
+            //     alert(xhrx.status + ': ' + xhrx.statusText); // пример вывода: 404: Not Found
+            // } else {
+            //     // вывести результат
+            //     var datax = JSON.parse(xhrx.responseText); // responseText -- текст ответа.
+            // }
+
+
             let id_procedure = document.querySelector("#id_procedure");
             let xhr1 = new XMLHttpRequest();
           let url1 = "https://localhost:44374/api/appointments"; //вызываем нашу таблицу с процедурами и клиентами, куда мы будем записывать их айдшники
@@ -84,17 +103,20 @@
             else {
                 var data2 = JSON.parse(xhr2.responseText);
             }
-            var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отправили
+            var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отпрали
+
+            // for ( var i = 0; i < datax.length; i++){
+            //     var comparable = datax[i].procedure_name + " — " + datax[i].procedure_price + "₽";
+            //     if (id_procedure == comparable)
+            //     {
+            //         id_procedure = datax[i].id_procedure;
+            //     }
+            // }
           var data1 = JSON.stringify
           ({"id_customer":id_customer.value, "id_procedure":id_procedure.value});
           xhr1.send(data1);
             alert("Вы успешно отправили заявку.")
         }
-      //  function loadList() {
-
-
-
-            
             
 
 
@@ -148,7 +170,7 @@
             </p>
             
              <button onclick="sendJSON()">Записаться</button><br>
-             <select name = "id_procedure" id="id_procedure"  size="7">
+             <select name = "procedures" id="id_procedure"  size="7">
 
 
              </div>
@@ -159,12 +181,16 @@
 
         var mainContainer1 = document.getElementById("id_procedure");
         for (var i = 0; i < data.length; i++) {
-          var anchor = document.createElement("option");
-          anchor.innerText = data[i].procedure_name + " — " + data[i].procedure_price + "₽";
-          mainContainer1.appendChild(anchor);
+          var procedure = document.createElement("option");
+          procedure.innerText = data[i].procedure_name + " — " + data[i].procedure_price + "₽";
+          mainContainer1.appendChild(procedure);
         }
         
-        
+
+      //  function loadList() {
+
+
+
 
 
   </script>
