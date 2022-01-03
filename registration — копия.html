@@ -11,12 +11,13 @@
     <script>
 
       var xhr = new XMLHttpRequest();
+      var proceduresData;
       xhr.open('GET', 'https://localhost:44374/api/procedures', false);
       xhr.send();
       if (xhr.status != 200) {
           alert(xhr.status + ': ' + xhr.statusText);
       } else {
-          var data = JSON.parse(xhr.responseText);
+          proceduresData = JSON.parse(xhr.responseText);
       }
 
 
@@ -45,6 +46,7 @@
           var data_id = JSON.parse(xhr.responseText);
           var id_customer = data_id.id_customer;
           console.log(id_customer);
+          let id_procedure = parseInt(document.getElementById("id_procedure").value);
                  //   var id = data.id_customer;
         //   console.log("id: " + id);
         //   xhr.onreadystatechange = function () {
@@ -63,11 +65,11 @@
 
  //         sendProcedures();
           
- let id_procedure = document.querySelector("#id_procedure");
-            console.log(id_procedure.value);
-            var index = id_procedure.value.split('.');
-            id_procedure = parseInt(index[0]);
-            console.log(id_procedure);
+ //let id_procedure = document.querySelector("#id_procedure");
+            // console.log(id_procedure.value);
+            // var index = id_procedure.value.split('.');
+            // id_procedure = parseInt(index[0]);
+            // console.log(id_procedure);
             let xhr1 = new XMLHttpRequest();
           let url1 = "https://localhost:44374/api/appointments"; //вызываем нашу таблицу с процедурами и клиентами, куда мы будем записывать их айдшники
           xhr1.open("POST", url1, true);
@@ -79,26 +81,7 @@
           };
 
           console.log(id_customer);
-          //  var id_customer = phone_num; //получаем значение айдишника клиента, которого только что отправили
 
-            // for ( var i = 0; i < datax.length; i++){
-            //     var comparable = datax[i].procedure_name + " — " + datax[i].procedure_price + "₽";
-            //     if (id_procedure == comparable)
-            //     {
-            //         id_procedure = datax[i].id_procedure;
-            //     }
-            // }
-
-            // var xhr2 = new XMLHttpRequest(); 
-            //  xhr2.open('GET', 'https://localhost:44374/api/customers', false); //загружаем данные из таблицы с клиентами
-            //  xhr2.send();
-            //  if (xhr2.status != 200) {
-            //      alert(xhr2.status + ': ' + xhr2.statusText);
-            //  } 
-            //  else {
-            //      var data2 = JSON.parse(xhr2.responseText);
-            //  }
-           //  var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отправили
 
            var data1 = JSON.stringify
            ({"id_customer":id_customer, "id_procedure":id_procedure});
@@ -179,12 +162,13 @@
          <script>
 
 
-        var mainContainer1 = document.getElementById("id_procedure");
-        for (var i = 0; i < data.length; i++) {
-          var anchor = document.createElement("option");
-          anchor.innerText = data[i].id_procedure + ". " + data[i].procedure_name + " — " + data[i].procedure_price + "₽";
-          mainContainer1.appendChild(anchor);
-        }
+            var mainContainer1 = document.getElementById("id_procedure");
+            for (var i = 0; i < proceduresData.length; i++) {
+                var anchor = document.createElement("option");
+                anchor.value = proceduresData[i].id_procedure;
+                anchor.innerText = proceduresData[i].procedure_name + " — " + proceduresData[i].procedure_price + "₽";
+                mainContainer1.appendChild(anchor);
+            }
         
         
 
