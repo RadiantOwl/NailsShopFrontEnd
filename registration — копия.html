@@ -11,20 +11,12 @@
     <script>
 
       var xhr = new XMLHttpRequest();
-
-      // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
       xhr.open('GET', 'https://localhost:44374/api/procedures', false);
-
-      // 3. Отсылаем запрос
       xhr.send();
-
-      // 4. Если код ответа сервера не 200, то это ошибка
       if (xhr.status != 200) {
-          // обработать ошибку
-          alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+          alert(xhr.status + ': ' + xhr.statusText);
       } else {
-          // вывести результат
-          var data = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+          var data = JSON.parse(xhr.responseText);
       }
 
 
@@ -45,16 +37,25 @@
           let url = "https://localhost:44374/api/customers";
           xhr.open("POST", url, true);
           xhr.setRequestHeader("Content-Type", "application/json");
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              result.innerHTML = this.responseText;
-            }
-          };
+
           
-          var data0 = JSON.stringify
+          var data = JSON.stringify
           ({ "first_name": first_name.value, "second_name": second_name.value, "email": email.value, "phone_num": phone_num.value, "date": date.value});
-          xhr.send(data0);
-          console.log(data0);
+          xhr.send(data);
+          var datac = JSON.parse(data);
+           var id = datac.id_customer;
+        //   console.log("id: " + id);
+        //   xhr.onreadystatechange = function () {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //       console.log(this.responseText);
+        //     }
+        //   };
+         //  var json_data = JSON.parse(xhr.responseText); 
+         //   console.log("json_data: " + json_data);
+              //  console.log(json_data);
+         // var pk_customer = json_data.id_customer;
+         // console.log(pk_customer);
+        
           //после отправки данных клиента вызываем функцию
           //эта функция найдёт последнего отправленного клиента и отправит его айди в таблицу с процедурами
 
@@ -62,28 +63,11 @@
           
         }
 
-
         function sendProcedures()
         {
-            // var xhrx = new XMLHttpRequest();
-
-            // // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-            // xhrx.open('GET', 'https://localhost:44374/api/procedures', false);
-
-            // // 3. Отсылаем запрос
-            // xhrx.send();
-
-            // // 4. Если код ответа сервера не 200, то это ошибка
-            // if (xhrx.status != 200) {
-            //     // обработать ошибку
-            //     alert(xhrx.status + ': ' + xhrx.statusText); // пример вывода: 404: Not Found
-            // } else {
-            //     // вывести результат
-            //     var datax = JSON.parse(xhrx.responseText); // responseText -- текст ответа.
-            // }
-
-
             let id_procedure = document.querySelector("#id_procedure");
+            var index = id_procedure.value.split('.');
+            id_procedure = parseInt(index[0]);
             let xhr1 = new XMLHttpRequest();
           let url1 = "https://localhost:44374/api/appointments"; //вызываем нашу таблицу с процедурами и клиентами, куда мы будем записывать их айдшники
           xhr1.open("POST", url1, true);
@@ -94,7 +78,8 @@
             }
           };
 
-            var id_customer = phone_num; //получаем значение айдишника клиента, которого только что отправили
+
+          //  var id_customer = phone_num; //получаем значение айдишника клиента, которого только что отправили
 
             // for ( var i = 0; i < datax.length; i++){
             //     var comparable = datax[i].procedure_name + " — " + datax[i].procedure_price + "₽";
@@ -103,11 +88,29 @@
             //         id_procedure = datax[i].id_procedure;
             //     }
             // }
-          var data1 = JSON.stringify
-          ({"id_customer":id_customer.value, "id_procedure":id_procedure.value});
-          xhr1.send(data1);
+
+             var xhr2 = new XMLHttpRequest(); 
+             xhr2.open('GET', 'https://localhost:44374/api/customers', false); //загружаем данные из таблицы с клиентами
+             xhr2.send();
+             if (xhr2.status != 200) {
+                 alert(xhr2.status + ': ' + xhr2.statusText);
+             } 
+            else {
+                var data2 = JSON.parse(xhr2.responseText);
+             }
+             var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отправили
+
+           var data1 = JSON.stringify
+           ({"id_customer":id_customer, "id_procedure":id_procedure});
+           console.log("data1: " + data1);
+         // xhr1.send(data1);
             alert("Вы успешно отправили заявку.")
         }
+      //  function loadList() {
+
+
+
+            
             
 
 
@@ -161,7 +164,7 @@
             </p>
             
              <button onclick="sendJSON()">Записаться</button><br>
-             <select name = "procedures" id="id_procedure"  size="7">
+             <select name = "id_procedure" id="id_procedure"  size="7">
 
 
              </div>
@@ -172,16 +175,12 @@
 
         var mainContainer1 = document.getElementById("id_procedure");
         for (var i = 0; i < data.length; i++) {
-          var procedure = document.createElement("option");
-          procedure.innerText = data[i].procedure_name + " — " + data[i].procedure_price + "₽";
-          mainContainer1.appendChild(procedure);
+          var anchor = document.createElement("option");
+          anchor.innerText = data[i].id_procedure + ". " + data[i].procedure_name + " — " + data[i].procedure_price + "₽";
+          mainContainer1.appendChild(anchor);
         }
         
-
-      //  function loadList() {
-
-
-
+        
 
 
   </script>
