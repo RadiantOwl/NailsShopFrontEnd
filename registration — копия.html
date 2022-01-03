@@ -33,7 +33,7 @@
           let first_name = document.querySelector('#first_name');
           let second_name = document.querySelector('#second_name');
           let email = document.querySelector('#email');
-          let phone_num = document.querySelector('#phone_num');
+          var phone_num = document.querySelector('#phone_num');
           let date = document.querySelector('#date');
  
             let result = document.querySelector('.result');
@@ -94,16 +94,7 @@
             }
           };
 
-            var xhr2 = new XMLHttpRequest(); 
-            xhr2.open('GET', 'https://localhost:44374/api/customers', false); //загружаем данные из таблицы с клиентами
-            xhr2.send();
-            if (xhr2.status != 200) {
-                alert(xhr2.status + ': ' + xhr2.statusText);
-            } 
-            else {
-                var data2 = JSON.parse(xhr2.responseText);
-            }
-            var id_customer = data2[(data2.length)-1].id_customer; //получаем значение айдишника клиента, которого только что отпрали
+            var id_customer = phone_num; //получаем значение айдишника клиента, которого только что отправили
 
             // for ( var i = 0; i < datax.length; i++){
             //     var comparable = datax[i].procedure_name + " — " + datax[i].procedure_price + "₽";
